@@ -6,7 +6,7 @@ function App() {
   const [otp, setOtp] = useState('');
   const [message, setMessage] = useState('');
 
-  const URL='https://server-iota-beryl.vercel.app'
+  const URL='http://localhost:3001'
 
 //sendmail api
 
