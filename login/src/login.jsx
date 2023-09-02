@@ -6,7 +6,7 @@ function App() {
   const [otp, setOtp] = useState('');
   const [message, setMessage] = useState('');
 
-  const URL='http://localhost:3001'
+  const URL='https://server-iota-beryl.vercel.app/'
 
 //sendmail api
 
@@ -21,10 +21,11 @@ try{
 
 const Verification = async () => {
     try {
-      const response = await axios.post(`${URL}/verify`, { otp, email });
+       await axios.post(`${URL}/verify`, { otp, email });
     } catch (error) {
       console.log('something went wrong ',error)
     }
+    setMessage("Otp Sent ")
   };
 
   return (
@@ -52,6 +53,7 @@ const Verification = async () => {
           Verify Email
         </button>
         <p className="text-red-500 font-semibold mb-8">{message}</p>
+        {console.log(message,"hshshshshshshsh")}
       </div>
     </div>
   );
