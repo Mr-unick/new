@@ -11,6 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Store OTPs in-memory for this example; in a production environment, use a database
+
 const otpStore = new Map();
 
 // Create a Nodemailer transporter
@@ -28,19 +29,16 @@ const transporter = nodemailer.createTransport({
 // Generate and send OTP email
 
 
-  const fun=async()=>{
-   
-    
-  }
-
-fun();
+  app.get("/",(req,res)=>{
+    res.send("app is running")
+  })
 
 app.post('/sendmail', async (req, res) => {
  const Email=req.body.Email;
   const otp = otpGenerator.generate(6, { digits: true, specialChars: false, alphabets: false });
 
   // Store the OTP for later verification (usually, this would be stored in a database)
-  otpStore.set("lendenikhil9121@gmail.com", otp);
+  otpStore.set(Email, otp);
 
   // Send OTP email
   const mailOptions = {
@@ -64,7 +62,8 @@ app.post('/verify', (req, res) => {
   const { otp, email } = req.body;
 
   const storedOTP = otpStore.get(email);
-
+  console.log(storedOTP);
+  
   if (storedOTP && otp === storedOTP) {
     otpStore.delete(email); 
     console.log("verified");
